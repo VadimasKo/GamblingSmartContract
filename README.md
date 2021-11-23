@@ -1,4 +1,3 @@
-# GamblingSmartContract
 # Gambling Smart Contract
 ***description***
 
