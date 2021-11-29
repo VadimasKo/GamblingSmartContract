@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GamblingPage from "../gamblingPage/GamblingPage";
 
 import HomePage     from "../homePage/HomePage";
 
@@ -11,8 +12,8 @@ function App() {
   return (
     <div className={styles.app}>
       {showHome ? 
-        <HomePage onClick={() => setShowHome(false)}/> :
-        <div>placeholder</div>
+        <GamblingPage/> :
+        <HomePage onClick={() => setShowHome(false)}/>
       }
     </div>
   );

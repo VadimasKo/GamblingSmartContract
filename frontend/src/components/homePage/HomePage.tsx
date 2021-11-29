@@ -23,4 +23,4 @@ const HomePage = ({ onClick }: Props) => {
   )
 }
 
-export default HomePage;
+export default HomePage
