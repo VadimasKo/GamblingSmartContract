@@ -1,0 +1,34 @@
+.images {
+  border-bottom:         2px solid white;
+  display:               grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items:         center;
+  margin-top:            3em;
+  padding-bottom:        2rem;
+  row-gap:               1.5em;
+  width:                 100%;
+  
+}
+
+
+.notSuicide {
+  background-image: url('../../../img/notSuicide.svg');
+  background-size:  cover;
+  display:          flex;
+  height:           7em;
+  width:            9em;
+}
+
+.placeBet {
+  background-image: url('../../../img/placeBet.svg');
+  background-size:  cover;
+  height:           7em;
+  width:            9em;
+}
+
+.wait {
+  background-image: url('../../../img/wait.svg');
+  background-size: cover;
+  height:          7em;
+  width:           9em;
+}

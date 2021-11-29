@@ -1,0 +1,32 @@
+
+.homePage {
+  color:           white;
+  display:         flex;
+  justify-content: center;
+  margin-top:      10%;
+}
+
+.homePageBanner {
+  align-items:    center;
+  display:        flex;
+  flex-direction: column;
+  width:          40%;
+}
+
+.bannerButton {
+  background:    transparent;
+  border-radius: 10%;
+  border:        2px solid #d4449f;
+  color:         #d4449f;
+  font-size:     20px;
+  margin-top:    2em;
+  padding:       1em;
+}
+
+.bannerButton:hover{
+  background:    #ab0c71;;
+  border-radius: 10%;
+  border:        2px solid #ab0c71;
+  color:         white;
+  font-size:     20px;
+}
