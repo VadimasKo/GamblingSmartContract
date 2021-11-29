@@ -3,6 +3,7 @@ import { Group }    from "@visx/group"
 import { Text }     from "@visx/text"
 
 import { Player }   from "../common/types"
+import useTimer     from "../timer/useTimer"
 
 interface Props {
   data:      Player[]
@@ -12,6 +13,8 @@ interface Props {
 
 
 const PieChart = ({ data, active, setActive }: Props) => {
+  const timer = useTimer(3610)
+
   return (
     <svg width={400} height={400}>
       <Group top={200} left={200}>
@@ -51,7 +54,7 @@ const PieChart = ({ data, active, setActive }: Props) => {
           ) : (
             <>
               <Text textAnchor='middle' fill='white' fontSize={53}>
-                00 : 00 : 26 
+                {timer}
               </Text>
               <Text textAnchor='middle' fill='white' fontSize={30} dy={40}>
                 25000$
