@@ -12,8 +12,8 @@ function App() {
   return (
     <div className={styles.app}>
       {showHome ? 
-        <GamblingPage/> :
-        <HomePage onClick={() => setShowHome(false)}/>
+        <HomePage onClick={() => setShowHome(false)}/> :
+        <GamblingPage/> 
       }
     </div>
   );

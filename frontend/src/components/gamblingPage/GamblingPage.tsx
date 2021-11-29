@@ -1,7 +1,8 @@
 import { useState } from "react"
 
 import { Player }   from "../common/types"
-import  PieChart    from "../pieChart/PieChart"
+import Button       from "../common/button/Button"
+import PieChart     from "../pieChart/PieChart"
 
 import styles       from './GamblingPage.module.css'
 
@@ -21,6 +22,11 @@ const GamblingPage = () => {
           data={players}
           active={active}
           setActive={setActive}
+        />
+        <Button
+          onClick={() => console.log('1')}
+          type='primary'
+          text='Place a bet'
         />
     </div>
   )
