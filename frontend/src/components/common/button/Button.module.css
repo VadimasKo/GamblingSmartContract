@@ -9,9 +9,24 @@
 }
 
 .primaryButton:hover{
-  background:    #ab0c71;;
+  background:    #ab0c71;
   border-radius: 10%;
   border:        2px solid #ab0c71;
   color:         white;
   font-size:     20px;
+}
+
+.secondaryButton {
+  border:        2px solid rgba(255, 255, 255, 0.651);
+  background:    transparent;
+  border-radius: 10%;
+  color:         rgba(255, 255, 255, 0.651);
+  font-size:     20px;
+  margin-top:    2em;
+  padding:       1em;
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.651);
+  color:      #ab0c71;
 }

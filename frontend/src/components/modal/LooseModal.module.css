@@ -1,0 +1,12 @@
+.looseModal {
+  align-items:      center;
+  background:       #cc2e92;
+  border-radius:    30px;
+  border:           4px solid rgba(255, 255, 255, 0.651);
+  display:          flex;
+  flex-direction:   column;
+  height:           25%;
+  justify-content:  center;
+  min-height:       10em;
+  width:            35%;
+}
