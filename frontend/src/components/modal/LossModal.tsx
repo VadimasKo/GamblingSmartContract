@@ -1,13 +1,13 @@
 import Button from "../common/button/Button"
 
 import Modal  from "./Modal"
-import styles from "./LooseModal.module.css"
+import styles from "./LossModal.module.css"
 
 
-const LooseModal = () => {
+const LossModal = () => {
     return (
       <Modal>
-          <div className={styles.looseModal}>
+          <div className={styles.lossModal}>
               <h2>Whoops, you have lost {">"}_{"<"}</h2>
               <Button
                 text='Got it'
@@ -20,4 +20,4 @@ const LooseModal = () => {
   }
   
 
-  export default LooseModal
+  export default LossModal

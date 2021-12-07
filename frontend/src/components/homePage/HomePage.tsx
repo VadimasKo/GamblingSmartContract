@@ -12,8 +12,8 @@ const HomePage = ({ onClick }: Props) => {
   return (
     <div className={styles.homePage}>
       <div className={styles.homePageBanner}>
-        <h1>🎰 "Smart Investment" 🎰</h1>
-        <p>a platform to quickly loose money</p>
+        <h1>🎰 Smart Investment 🎰</h1>
+        <p>a platform to quickly lose money</p>
         <InstructionSteps/>
         <Button
           type='primary'
