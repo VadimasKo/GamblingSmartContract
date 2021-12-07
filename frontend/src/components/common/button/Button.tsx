@@ -5,15 +5,31 @@ import styles        from './Button.module.css'
 interface Props {
   text:    ReactNode
   onClick: () => void
-  type:    'primary' | 'secondary'
+  type:    'primary' | 'secondary' | 'rounded'
 }
 
 
 const Button = ({ text, onClick, type }: Props) => {
+  let style: string
+  switch (type) {
+    case 'primary':
+      style = styles.primaryButton
+      break
+    case 'secondary':
+      style = styles.secondaryButton
+      break
+    case 'rounded':
+      style = styles.roundedButton
+      break
+    default:
+      style = styles.primaryButton
+      break
+  }
+
+
   return (
     <button
-      {...type === 'primary' && { className: styles.primaryButton }}
-      {...type === 'secondary' && { className: styles.secondaryButton }}
+      className={style}
       onClick={onClick}
     >
       {text}

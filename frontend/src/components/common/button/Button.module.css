@@ -30,3 +30,21 @@
   background: rgba(255, 255, 255, 0.651);
   color:      #ab0c71;
 }
+
+.roundedButton {
+  background:    transparent;
+  border-radius: 100%;
+  border:        2px solid #d4449f;
+  color:         #d4449f;
+  font-size:     30px;
+  height:        3rem;
+  width:         3rem;
+}
+
+.roundedButton:hover {
+  background:    #ab0c71;
+  border-radius: 100%;
+  border:        2px solid #ab0c71;
+  color:         white;
+  font-size:     30px;
+}
