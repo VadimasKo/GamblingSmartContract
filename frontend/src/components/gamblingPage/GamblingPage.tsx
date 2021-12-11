@@ -11,6 +11,7 @@ const players: Player[] = [
   { id: "1", amount: 200, color: "#0033ad"},
   { id: "2", amount: 145, color: "#00ffbd"},
   { id: "3", amount: 600, color: "#F7931A"},
+  { id: "4", amount: 600, color: "#F7931A"},
 ]
 
 const GamblingPage = () => {
