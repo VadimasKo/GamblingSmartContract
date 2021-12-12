@@ -24,7 +24,7 @@ contract GamblingPool is Timed, Players {
   }
 
   constructor() payable {
-    require(msg.value > 0);
+    // require(msg.value > 0, 'can start only by betting');
     setDeadline();
   }
 
