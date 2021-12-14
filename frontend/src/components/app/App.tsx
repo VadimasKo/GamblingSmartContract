@@ -8,7 +8,7 @@ import styles       from "./App.module.css"
 
 
 const App = () => {
-  const [showHome, setShowHome] = useState(true)
+  const [showHome, setShowHome] = useState(false)
 
   return (
     <Web3Provider>

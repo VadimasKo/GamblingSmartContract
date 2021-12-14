@@ -8,6 +8,10 @@ import "./Timed.sol";
 contract GamblingPool is Timed, Players {
   uint private poolSize = 0;
 
+  event GameStarted(uint _deadline);
+  event BetPlaced(string _name, uint betSize);
+  event WinnerFound(string _name, uint prize);
+
   modifier checkStatus {
     if(checkIfOpen()) {
       _; // if open continue 
@@ -19,6 +23,7 @@ contract GamblingPool is Timed, Players {
         // restart the game
         resetPlayers();
         setDeadline();
+        emit GameStarted(getDeadline());
       }
     }
   }
@@ -26,6 +31,7 @@ contract GamblingPool is Timed, Players {
   constructor() payable {
     // require(msg.value > 0, 'can start only by betting');
     setDeadline();
+    emit GameStarted(getDeadline());
   }
 
   function getPoolSize() public view returns(uint _poolSize) {
@@ -37,6 +43,7 @@ contract GamblingPool is Timed, Players {
     // check if open
     addPlayer(msg.sender, msg.value, _name);
     poolSize += msg.value;
+    emit BetPlaced(_name, msg.value);
   }
 
   function calculateWinner() private view returns(Player memory winner) {
@@ -58,6 +65,7 @@ contract GamblingPool is Timed, Players {
 
   function awardWinner(Player memory _winner) private {
     if(payable(_winner.wallet).send(poolSize)) {
+      emit WinnerFound(_winner.name, poolSize);
       poolSize = 0;
     }
   }

@@ -23,7 +23,7 @@ const BetSelector = ({ onSubmit }: Props) => {
         <input
           className={styles.input}
           value={betSize}
-          onChange={undefined}
+          onChange={() => console.log('')}
         />
          <Button
           onClick={() => setBetSize(state => state + 1)}
