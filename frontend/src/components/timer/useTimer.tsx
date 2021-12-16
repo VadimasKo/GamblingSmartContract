@@ -7,7 +7,7 @@ import { setInterval }  from "timers"
 import { timeToString } from "./timeToString"
 
 
-const useTimer = (time: number) => {
+const useTimer = (time: number, onZero: () => void) => {
   const [timer, setTimer] = useState(time)
   
   useEffect(() => {
@@ -15,11 +15,17 @@ const useTimer = (time: number) => {
   },[time])
 
   useEffect(() => {
+    if(timer === 0) {
+      onZero()
+    }
+  }, [onZero, timer])
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimer(state => {
         if(state <= 0) {
           clearInterval(interval)
-          return 0
+          return state
         } else {
           return state - 1
         }

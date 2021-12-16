@@ -1,20 +1,22 @@
-import { Pie }      from "@visx/shape"
-import { Group }    from "@visx/group"
-import { Text }     from "@visx/text"
+import { Pie }             from "@visx/shape"
+import { Group }           from "@visx/group"
+import { Text }            from "@visx/text"
 
-import { Player, PlayerWithColor }   from "../common/types"
-import useTimer     from "../timer/useTimer"
+import { PlayerWithColor } from "../common/types"
+import useTimer            from "../timer/useTimer"
 
 interface Props {
-  active:        Player | null
+  active:        PlayerWithColor | null
   data:          PlayerWithColor[]
+  onZero:        () => void
+  poolSize:      number
   remainingTime: number
-  setActive:     (x: Player | null) => void
+  setActive:     (x: PlayerWithColor | null) => void
 }
 
 
-const PieChart = ({ data, active, remainingTime, setActive }: Props) => {
-  const timer = useTimer(remainingTime)
+const PieChart = ({ data, active, onZero, poolSize, remainingTime, setActive}: Props) => {
+  const timer = useTimer(remainingTime, onZero)
 
   return (
     <svg width={400} height={400}>
@@ -33,7 +35,7 @@ const PieChart = ({ data, active, remainingTime, setActive }: Props) => {
             return pie.arcs.map(arc => {
               return (
                 <g
-                  key={arc.data.wallet}
+                  key={arc.index}
                   onMouseEnter={() => setActive(arc.data)}
                   onMouseLeave={() => setActive(null)}
                 >
@@ -46,10 +48,10 @@ const PieChart = ({ data, active, remainingTime, setActive }: Props) => {
         {active ? (
           <>
             <Text textAnchor='middle' fill='white' fontSize={20} dy={-30}>
-              {`player: ${active.wallet}`}
+              {`player: ${active.name}`}
             </Text>
             <Text textAnchor='middle' fill='white' dy={30} fontSize={53}>
-              {`$${active.betSize}`}
+              {`${active.betSize}$`}
             </Text>
           </>
           ) : (
@@ -58,7 +60,7 @@ const PieChart = ({ data, active, remainingTime, setActive }: Props) => {
                 {timer}
               </Text>
               <Text textAnchor='middle' fill='white' fontSize={30} dy={40}>
-                25000$
+                {`${poolSize}$`}
               </Text>
             </>
           )

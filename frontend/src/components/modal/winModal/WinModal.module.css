@@ -1,0 +1,12 @@
+.winModal {
+  align-items:      center;
+  background:      #0f132b;
+  border-radius:    30px;
+  border:           4px solid rgba(255, 255, 255, 0.651);
+  display:          flex;
+  flex-direction:   column;
+  height:           25%;
+  justify-content:  center;
+  min-height:       10em;
+  width:            20%;
+}

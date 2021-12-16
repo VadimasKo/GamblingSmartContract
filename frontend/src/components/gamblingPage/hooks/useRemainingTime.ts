@@ -13,7 +13,7 @@ const useRemainingTime = (): [number, () => void] => {
   const { gamblingPool } = useContext(Web3Context)
   const getDeadline      = gamblingPool?.methods.getDeadline
   
-  const [remainingTime, setRemainingTime] = useState(0)
+  const [remainingTime, setRemainingTime] = useState(-1)
   
   const getRemainingTime = useCallback(async () => {
     const deadline = parseInt(await getDeadline().call())

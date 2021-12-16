@@ -1,47 +1,61 @@
 import {
+  useCallback,
   useContext,
-  useEffect,
   useState,
-}                       from "react"
+}                          from "react"
 
-import { Player }       from "../common/types"
-import { Web3Context }  from "../web3/web3Context"
-import BetSelector      from "../betSelector/BetSelector"
-import PieChart         from "../pieChart/PieChart"
+import { PlayerWithColor } from "../common/types"
+import { Web3Context }     from "../web3/web3Context"
+import BetSelector         from "../betSelector/BetSelector"
+import PieChart            from "../pieChart/PieChart"
+import useModal            from "../modal/useModal"
 
-import styles           from './GamblingPage.module.css'
-import useRemainingTime from "./hooks/useRemainingTime"
-import usePlayers       from "./hooks/usePlayers"
+import styles              from './GamblingPage.module.css'
+import usePlayers          from "./hooks/usePlayers"
+import usePoolSize         from "./hooks/usePoolSize"
+import useRemainingTime    from "./hooks/useRemainingTime"
 
 
 const GamblingPage = () => {
   const { account, gamblingPool } = useContext(Web3Context)
-  const placeBet                  = gamblingPool?.methods.placeBet
-  
-  const [remainingTime, getRemainingTime] = useRemainingTime()
+  const placeBet  = gamblingPool?.methods.placeBet
+  const getWinner = gamblingPool?.methods.getWinner
+
+  const [active, setActive]               = useState<PlayerWithColor | null>(null)
+  const [modal, updateModal]              = useModal()
   const [players, getPlayers]             = usePlayers()
-  const [active, setActive]               = useState<Player | null>(null)
-
-
+  const [poolSize, getPoolSize]           = usePoolSize()
+  const [remainingTime, getRemainingTime] = useRemainingTime()
 
   const handleSubmit = async (betSize: number, name: string) => {
-    await placeBet(name).send({ from: account, value: betSize }).on('transactionHash',(hash: string) => {
-      console.log('success', hash)
-    })
+    await placeBet(name).send({ from: account, value: betSize })
     getRemainingTime()
     getPlayers()
+    getPoolSize()
   }
 
-  console.log(players)
+  const onDeadLine = useCallback(async () => {
+    const winner = await getWinner().call()
+    if (winner[0] === account) {
+      updateModal('win')
+    } else {
+      updateModal('loss')
+    }
+  }, [account, getWinner, updateModal])
+
+
   return (
     <div className={styles.GamblingPage}>
-        <PieChart
-          data={players}
-          remainingTime={remainingTime}
-          active={active}
-          setActive={setActive}
-        />
-        <BetSelector onSubmit={handleSubmit}/>
+      <PieChart
+        data={players}
+        remainingTime={remainingTime}
+        active={active}
+        setActive={setActive}
+        poolSize={poolSize}
+        onZero={onDeadLine}
+      />
+      <BetSelector onSubmit={handleSubmit} />
+      {modal}
     </div>
   )
 }

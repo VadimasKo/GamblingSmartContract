@@ -3,10 +3,10 @@ pragma solidity >=0.8 <0.9.0;
 
 
 contract Timed {
-  uint private deadline;
+  uint private deadline = 0;
 
   function setDeadline() internal {
-    deadline = block.timestamp + 60; //60s from current time
+    deadline = block.timestamp + 20; //in seconds
   }
 
   function getDeadline() public view returns(uint _deadline) {
