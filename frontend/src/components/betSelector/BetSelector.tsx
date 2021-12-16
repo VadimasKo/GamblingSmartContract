@@ -10,7 +10,7 @@ interface Props {
 
 
 const BetSelector = ({ onSubmit }: Props) => {
-  const [betSize, setBetSize] = useState(1)
+  const [betSize, setBetSize] = useState(12345678901234567)
   const [name, setName] = useState('')
 
   return (
@@ -29,7 +29,7 @@ const BetSelector = ({ onSubmit }: Props) => {
         <input
           className={styles.input}
           value={betSize}
-          onChange={() => console.log('')}
+          onChange={(e) => setBetSize(parseInt(e.target.value))}
         />
          <Button
           onClick={() => setBetSize(state => state + 1)}

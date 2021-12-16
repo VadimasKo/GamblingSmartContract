@@ -28,7 +28,7 @@ const GamblingPage = () => {
   const [remainingTime, getRemainingTime] = useRemainingTime()
 
   const handleSubmit = async (betSize: number, name: string) => {
-    await placeBet(name).send({ from: account, value: betSize })
+    await placeBet(name).send({ from: account, value: betSize, gas: 211000 })
     getRemainingTime()
     getPlayers()
     getPoolSize()

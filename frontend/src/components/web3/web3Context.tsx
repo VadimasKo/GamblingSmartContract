@@ -14,8 +14,8 @@ interface Web3ContextValues {
   gamblingPool?: Contract
 }
 
-const networkURL = 'http://localhost:7545'
-const networkID = '5777'
+const networkURL = 'https://ropsten.infura.io/v3/[a656fcbabae2461b9263faf89cd28e6a]'
+const networkID = '3'
 
 
 export const Web3Context =  createContext<Web3ContextValues>({})
