@@ -1,13 +1,16 @@
-import { useContext, useState } from "react"
+import {
+  useContext,
+  useState,
+}                       from "react"
 
-import { Player }   from "../common/types"
+import { Player }       from "../common/types"
 import { Web3Context }  from "../web3/web3Context"
-import BetSelector  from "../betSelector/BetSelector"
-import PieChart     from "../pieChart/PieChart"
+import BetSelector      from "../betSelector/BetSelector"
+import PieChart         from "../pieChart/PieChart"
 
 import styles           from './GamblingPage.module.css'
 import useRemainingTime from "./hooks/useRemainingTime"
-import usePlayers from "./hooks/usePlayers"
+import usePlayers       from "./hooks/usePlayers"
 
 
 // const players: Player[] = [
