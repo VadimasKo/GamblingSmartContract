@@ -8,6 +8,7 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
+  contracts_build_directory: "../frontend/src/contractBuilds",
   networks: {
     develop: {
       network_id: "*",
