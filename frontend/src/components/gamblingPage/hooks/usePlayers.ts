@@ -11,6 +11,8 @@ import {
 }                      from "../../common/types"
 import { Web3Context } from "../../web3/web3Context"
 
+const colors = ['#F7931A', '#00ffbd','#0033ad']
+
 
 const usePlayers = (): [PlayerWithColor[], () => void] => {
   const { gamblingPool } = useContext(Web3Context)
@@ -20,9 +22,11 @@ const usePlayers = (): [PlayerWithColor[], () => void] => {
 
   const getPlayers = useCallback(async () => {
     const players: Player[] = await fetchPlayers().call()
-    console.log(players)
-  }, [fetchPlayers
-  ])
+
+    setPlayers(players.map((player, index) => {
+      return {...player, color: colors[index % colors.length]}
+    }))
+  }, [fetchPlayers])
 
   useEffect(() => {
     if (gamblingPool) {

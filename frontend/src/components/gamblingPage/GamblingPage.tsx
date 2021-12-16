@@ -1,5 +1,6 @@
 import {
   useContext,
+  useEffect,
   useState,
 }                       from "react"
 
@@ -13,13 +14,6 @@ import useRemainingTime from "./hooks/useRemainingTime"
 import usePlayers       from "./hooks/usePlayers"
 
 
-// const players: Player[] = [
-//   // { id: "1", amount: 200, color: "#0033ad"},
-//   // { id: "2", amount: 145, color: "#00ffbd"},
-//   // { id: "3", amount: 600, color: "#F7931A"},
-//   // { id: "4", amount: 600, color: "#F7931A"},
-// ]
-
 const GamblingPage = () => {
   const { account, gamblingPool } = useContext(Web3Context)
   const placeBet                  = gamblingPool?.methods.placeBet
@@ -29,20 +23,21 @@ const GamblingPage = () => {
   const [active, setActive]               = useState<Player | null>(null)
 
 
-  const handleSubmit = (betSize: number) => {
-    placeBet('vardas').send({ from: account, value: betSize }).on('transactionHash',(hash: string) => {
+
+  const handleSubmit = async (betSize: number, name: string) => {
+    await placeBet(name).send({ from: account, value: betSize }).on('transactionHash',(hash: string) => {
       console.log('success', hash)
     })
     getRemainingTime()
+    getPlayers()
   }
 
-
+  console.log(players)
   return (
     <div className={styles.GamblingPage}>
         <PieChart
-          // data={players}
+          data={players}
           remainingTime={remainingTime}
-          data={[]}
           active={active}
           setActive={setActive}
         />

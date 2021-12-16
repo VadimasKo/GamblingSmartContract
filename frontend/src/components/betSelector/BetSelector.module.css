@@ -1,23 +1,42 @@
 .betSelector {
-  margin-top: 2rem;
+  align-items: center;
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 }
 
 .input {
   background-color: transparent;
-  border:           none;
   border-bottom:    2px solid white;
+  border:           none;
   color:            white;
   font-size:        30px;
   font-weight:      bold;
   margin-left:      1rem;
   margin-right:     1rem;
   max-width:        7rem;
+  padding-top:      3rem;
   text-align:       center;
-  padding-top: 3rem;
 }
 
 .input:focus {
+  outline: none;
+}
+
+.nameInput {
+  background-color: transparent;
+  border-bottom:    2px solid white;
+  border:           none;
+  color:            white;
+  font-size:        30px;
+  font-weight:      bold;
+  justify-self:     center;
+  margin-left:      1rem;
+  margin-right:     1rem;
+  padding-top:      3rem;
+  text-align:       center;
+}
+
+.nameInput:focus {
   outline: none;
 }
