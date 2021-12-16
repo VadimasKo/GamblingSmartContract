@@ -2,28 +2,29 @@ import { Pie }      from "@visx/shape"
 import { Group }    from "@visx/group"
 import { Text }     from "@visx/text"
 
-import { Player }   from "../common/types"
+import { Player, PlayerWithColor }   from "../common/types"
 import useTimer     from "../timer/useTimer"
 
 interface Props {
-  data:      Player[]
-  active:    Player | null
-  setActive: (x: Player | null) => void
+  active:        Player | null
+  data:          PlayerWithColor[]
+  remainingTime: number
+  setActive:     (x: Player | null) => void
 }
 
 
-const PieChart = ({ data, active, setActive }: Props) => {
-  const timer = useTimer(3610)
+const PieChart = ({ data, active, remainingTime, setActive }: Props) => {
+  const timer = useTimer(remainingTime)
 
   return (
     <svg width={400} height={400}>
       <Group top={200} left={200}>
         <Pie
           data={data}
-          pieValue={data => data.amount}
+          pieValue={data => data.betSize}
           outerRadius={200}  
           innerRadius={({data}) => {
-            const size = (active && active.id === data.id) ? 16 : 12
+            const size = (active && active.wallet === data.wallet) ? 16 : 12
             return 200 - size
           }}
           padAngle={0.02}
@@ -32,7 +33,7 @@ const PieChart = ({ data, active, setActive }: Props) => {
             return pie.arcs.map(arc => {
               return (
                 <g
-                  key={arc.data.id}
+                  key={arc.data.wallet}
                   onMouseEnter={() => setActive(arc.data)}
                   onMouseLeave={() => setActive(null)}
                 >
@@ -45,10 +46,10 @@ const PieChart = ({ data, active, setActive }: Props) => {
         {active ? (
           <>
             <Text textAnchor='middle' fill='white' fontSize={20} dy={-30}>
-              {`player: ${active.id}`}
+              {`player: ${active.wallet}`}
             </Text>
             <Text textAnchor='middle' fill='white' dy={30} fontSize={53}>
-              {`$${active.amount}`}
+              {`$${active.betSize}`}
             </Text>
           </>
           ) : (

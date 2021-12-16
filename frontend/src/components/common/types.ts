@@ -1,5 +1,9 @@
 export interface Player {
-  id:     string
-  amount: number
-  color:  string
+  wallet:  string
+  betSize: number
+  name:    string
+}
+
+export interface PlayerWithColor extends Player{
+  color: string
 }
