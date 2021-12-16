@@ -3,9 +3,9 @@ import {
   ReactChild,
   useEffect,
   useState,
-}                   from "react"
-import { Contract } from "web3-eth-contract";
-import Web3         from "web3"
+}                           from "react"
+import { Contract }         from "web3-eth-contract";
+import Web3                 from "web3"
 
 import GamblingPoolContract from '../../contractBuilds/GamblingPool.json'
 
