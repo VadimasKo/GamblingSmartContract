@@ -2,14 +2,14 @@
 pragma solidity >=0.8 <0.9.0;
 
 
-contract Players {
+contract Players{
   struct Player {
     address wallet;
     uint    betSize;
     string  name;
   }
 
-  Player[] players;
+  Player[] private players;
 
   function getPlayers() public view returns(Player[] memory _players) {
     return players;
@@ -22,5 +22,4 @@ contract Players {
   function resetPlayers() internal {
     delete players;
   }
-
 }

@@ -7,66 +7,66 @@ import "./Timed.sol";
 
 contract GamblingPool is Timed, Players {
   uint private poolSize = 0;
-
-  event GameStarted(uint _deadline);
-  event BetPlaced(string _name, uint betSize);
-  event WinnerFound(string _name, uint prize);
+  Player private winner;
 
   modifier checkStatus {
     if(checkIfOpen()) {
-      _; // if open continue 
+      _; // if open continue
     } else {
       if (poolSize != 0) {
-        // calculate winner
-        Player memory winner = calculateWinner();
-      } else {
-        // restart the game
-        resetPlayers();
+        //it means pool is closed winner not rewarded
+        calculateWinner();
+        awardWinner(); //resets pool
+        _; 
+      } else { // initial launch
         setDeadline();
-        emit GameStarted(getDeadline());
+        _;
       }
     }
   }
 
-  constructor() payable {
-    // require(msg.value > 0, 'can start only by betting');
-    setDeadline();
-    emit GameStarted(getDeadline());
+  function placeBet(string memory _name) public payable checkStatus {
+    require(msg.value > 0, "bet size can not be equal to 0");
+    addPlayer(msg.sender, msg.value, _name);
+    poolSize += msg.value;
   }
 
   function getPoolSize() public view returns(uint _poolSize) {
     return poolSize;
   }
 
-  function placeBet(string memory _name) public payable checkStatus {
-    require(msg.value > 0, "bet size can not be equal to 0");
-    // check if open
-    addPlayer(msg.sender, msg.value, _name);
-    poolSize += msg.value;
-    emit BetPlaced(_name, msg.value);
+  function getWinner() public checkStatus returns(Player memory _winner) {
+    return winner;
   }
 
-  function calculateWinner() private view returns(Player memory winner) {
-    uint winningBallot      = getRandom() % poolSize;
+  function calculateWinner() private {
+    uint winningBallot = getRandom() % poolSize;
     Player[] memory players = getPlayers();
 
     uint bufferPool = 0;
     for(uint i = 0; i < players.length; i++) {
       bufferPool += players[i].betSize;
       if(winningBallot < bufferPool) {
-        return players[i];
+        winner = players[i];
+        break;
       }
     }
   }
 
-  function getRandom() private view returns(uint) {
-    return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, poolSize)));
-  }
-
-  function awardWinner(Player memory _winner) private {
-    if(payable(_winner.wallet).send(poolSize)) {
-      emit WinnerFound(_winner.name, poolSize);
-      poolSize = 0;
+  function awardWinner() private {
+    if(payable(winner.wallet).send(poolSize)) {
+      resetPool();
     }
   }
+
+  function getRandom() private view returns(uint _randomNumber) {
+    return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, poolSize)));
+  }
+ 
+  function resetPool() private {
+    poolSize = 0;
+    resetPlayers();
+    setDeadline();
+  }
+
 }

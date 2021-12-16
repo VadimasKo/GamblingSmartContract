@@ -6,12 +6,11 @@ contract Timed {
   uint private deadline;
 
   function setDeadline() internal {
-    deadline = block.timestamp + 72; //timer for 72 secods
+    deadline = block.timestamp + 60; //60s from current time
   }
 
   function getDeadline() public view returns(uint _deadline) {
-    checkIfOpen();
-    return deadline;    
+    return deadline;
   }
 
   function checkIfOpen() public view returns (bool _isOpen) {
