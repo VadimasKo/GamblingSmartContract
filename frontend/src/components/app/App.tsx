@@ -8,15 +8,13 @@ import styles       from "./App.module.css"
 
 
 const App = () => {
-  const [showHome, setShowHome] = useState(false)
+  const [showHome, setShowHome] = useState(true)
 
   return (
     <Web3Provider>
       <div className={styles.app}>
-        {showHome ? 
-          <HomePage onClick={() => setShowHome(false)}/> :
-          <GamblingPage/> 
-        }
+        {showHome && <HomePage onClick={() => setShowHome(false)}/>}
+        <GamblingPage/> 
       </div>
     </Web3Provider>
   );
