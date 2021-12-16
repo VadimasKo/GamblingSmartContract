@@ -28,5 +28,12 @@
 <img width="960" alt="reward" src="https://user-images.githubusercontent.com/54241089/146417119-40baebfe-eaa7-4a4d-b8f4-3f136d3d475d.png">
 
 ## How to run 🛠️ <a name="3"></a>
-### For Linux users ```TODO```
-### For Other OS  - TODO
+### Back End (local network)
+ 1) Make sure you have truffle installed
+ 2) Install and run Ganache
+ 3) Make sure Ganache settings match settings in truffle.js 
+ 4) In ``./backend`` migrate Contracts ``` truffle migrate ``` or ``` truffle migrate --reset```
+### Front End 
+ 1) Install MetaMask browser extension
+ 2) Select or add local Ganache network to Metamask 
+ 3) In ``./frontend`` run ```yarn``` and ``` yarn start```
