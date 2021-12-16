@@ -6,7 +6,7 @@ contract Timed {
   uint private deadline;
 
   function setDeadline() internal {
-    deadline = block.timestamp + 60*1000; //timer for 1 minute
+    deadline = block.timestamp + 72; //timer for 72 secods
   }
 
   function getDeadline() public view returns(uint _deadline) {

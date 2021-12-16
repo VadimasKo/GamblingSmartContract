@@ -44,7 +44,7 @@ const Web3Provider = ({ children }: { children: ReactChild }) => {
   }, [])
 
   return (
-    <Web3Context.Provider value={ { account: account, gamblingPool: gamblingPool }}>
+    <Web3Context.Provider value={{ account, gamblingPool }}>
       {children}
     </Web3Context.Provider>
   )
