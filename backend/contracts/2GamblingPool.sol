@@ -1,49 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8 <0.9.0;
 
-
-contract GamblingPool {
-
-  uint private deadline;
-
-  constructor() {
-    deadline = 0;
-  } 
-
-  function setDeadline() public {
-    deadline = block.timestamp + 72; //timer for 1 minute
-  }
-
-  function getDeadline() public view returns(uint _deadline) {
-    return deadline;    
-  }
-
-  function checkIfOpen() public view returns (bool _isOpen) {
-    return block.timestamp <= deadline;
-  }
-
-    struct Player {
-    address wallet;
-    uint    betSize;
-    string  name;
-  }
-
-  Player[] players;
-
-  function getPlayers() public view returns(Player[] memory _players) {
-    return players;
-  }
-
-  function addPlayer(address _wallet, uint _betSize, string memory _name) internal {
-    players.push(Player(_wallet, _betSize, _name));
-  }
-
-  function resetPlayers() internal {
-    delete players;
-  }
+import "./Players.sol";
+import "./Timed.sol";
 
 
-
+contract GamblingPool is Timed, Players {
   uint private poolSize = 0;
 
   event GameStarted(uint _deadline);
@@ -66,11 +28,11 @@ contract GamblingPool {
     }
   }
 
-  // constructor() payable {
-  //   // require(msg.value > 0, 'can start only by betting');
-  //   setDeadline();
-  //   emit GameStarted(getDeadline());
-  // }
+  constructor() payable {
+    // require(msg.value > 0, 'can start only by betting');
+    setDeadline();
+    emit GameStarted(getDeadline());
+  }
 
   function getPoolSize() public view returns(uint _poolSize) {
     return poolSize;
@@ -86,7 +48,7 @@ contract GamblingPool {
 
   function calculateWinner() private view returns(Player memory winner) {
     uint winningBallot      = getRandom() % poolSize;
-    // Player[] memory players = getPlayers();
+    Player[] memory players = getPlayers();
 
     uint bufferPool = 0;
     for(uint i = 0; i < players.length; i++) {
